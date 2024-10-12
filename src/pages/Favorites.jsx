@@ -5,6 +5,7 @@ const Favorites = () => {
 
     // Ezy bar
     // Test Git hub
+    // Test New CMD
     const [favorites, setFavorites] = useState([]);
 
     useEffect(() => {
