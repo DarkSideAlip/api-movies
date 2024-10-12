@@ -9,18 +9,33 @@ const MovieList = ({ movies1 }) => {
     const [favorites, setFavorites] = useState([]);
 
     const toggleFavorite = (movie) => {
-        if (favorites.includes(movie.id)) {
-            setFavorites(favorites.filter(id => id !== movie.id));
+        let updatedFavorites;
+        if (favorites.some(fav => fav.id === movie.id)) {
+            updatedFavorites = favorites.filter(fav => fav.id !== movie.id);
         } else {
-            setFavorites([...favorites, movie.id]);
+            updatedFavorites = [...favorites, movie];
         }
+        setFavorites(updatedFavorites);
+        localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
     };
+    
 
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
+    const initializeFavorites = () => {
+        const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        setFavorites(savedFavorites);
+    };
+    
     useEffect(() => {
+        initializeFavorites();
+    }, []);
+    
+
+    useEffect(() => {
+
         const fetchMovies = async () => {
             try {
                 const response = await axios.get(
@@ -56,7 +71,7 @@ const MovieList = ({ movies1 }) => {
                                 className='absolute top-2 right-2'
                                 onClick={() => toggleFavorite(movie)}
                             >
-                                {favorites.includes(movie.id) ? (
+                                {favorites.some(fav => fav.id === movie.id) ? (
                                     <HeartIcon className='h-6 w-6 text-red-500' />
                                 ) : (
                                     <OutlineHeartIcon className='h-6 w-6 text-gray-500' />
