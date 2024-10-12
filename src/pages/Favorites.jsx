@@ -3,6 +3,7 @@ import MovieList from '../components/MovieList';
 
 const Favorites = () => {
 
+    // Ezy bar
     const [favorites, setFavorites] = useState([]);
 
     useEffect(() => {
