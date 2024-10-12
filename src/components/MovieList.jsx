@@ -6,6 +6,7 @@ import Favorites from '../pages/Favorites';
 
 const MovieList = ({ movies1 }) => {
 
+    // Ezy
     const [favorites, setFavorites] = useState([]);
 
     const toggleFavorite = (movie) => {
