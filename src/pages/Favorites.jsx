@@ -4,6 +4,7 @@ import MovieList from '../components/MovieList';
 const Favorites = () => {
 
     // Ezy bar
+    // Test Git hub
     const [favorites, setFavorites] = useState([]);
 
     useEffect(() => {
