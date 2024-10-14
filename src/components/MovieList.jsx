@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { HeartIcon } from '@heroicons/react/solid';
 import { HeartIcon as OutlineHeartIcon } from '@heroicons/react/outline';
 import Favorites from '../pages/Favorites';
@@ -7,6 +8,7 @@ import Favorites from '../pages/Favorites';
 const MovieList = ({ movies1 }) => {
 
     const [favorites, setFavorites] = useState([]);
+    const navigate = useNavigate();
 
     const toggleFavorite = (movie) => {
         let updatedFavorites;
@@ -82,6 +84,12 @@ const MovieList = ({ movies1 }) => {
                                 className='w-48 h-auto rounded'
                             />
                             <h2 className='mt-2'>{movie.title}</h2>
+                            <button 
+                                className='mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700'
+                                onClick={() => navigate(`/movie/${movie.id}`)}
+                            >
+                                View Details
+                            </button>
                         </li>
                     ))}
                 </ul>
